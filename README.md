@@ -1,5 +1,3 @@
-# Kdenlive Scene Importer (Go)
-
 # Kdenlive Scene Importer (`add-scenes`)
 
 Ein einfaches Go-Tool, das **automatisch Szenen aus einer `pyscenedetect`-CSV-Datei** in eine **Kdenlive-Projektdatei** (`.kdenlive`) importiert – ideal für schnelle Schnittvorbereitung.
