@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/csv"
 	"flag"
+	"fmt"
 
 	"log"
 	"os"
@@ -37,6 +38,11 @@ func main() {
 		log.Fatal("Fehler: Kann CSV parsen", err)
 	}
 
+	// Finde Gruppierungen
+	groups := doc.FindElement("//property[@name='kdenlive:sequenceproperties.groups']")
+	//groups.Child = nil
+	fmt.Println(groups.Text())
+
 	// Finde Playlisten mit Einträgen
 	var kdenliveId string
 	playlists := doc.FindElements("//playlist[entry]")
@@ -45,7 +51,7 @@ func main() {
 		playlistId := playlist.SelectAttrValue("id", "keine Playlist")
 		if playlistId != "main_bin" {
 			log.Printf("Lösche Einträge in %s.\n", playlistId)
-			producerChain := playlist.FindElement("//entry[@producer]").SelectAttrValue("producer", "keine Ahnung")
+			producerChain := playlist.FindElement(".//entry[@producer]").SelectAttrValue("producer", "keine Ahnung")
 			playlist.Child = nil
 
 			// -- Schreibe Szenen-Einträge aus CSV Datei in Playlists
